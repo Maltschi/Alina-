@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffe8ef" id="themeColor"><meta name="description" content="Two of Us – kleine Spiele für euch zwei.">
+<link rel="manifest" href="manifest.webmanifest"><title>Alina und Nikitas Game Night</title>
+<style>
+:root{--bg:#fff0f3;--paper:#fff9fa;--ink:#542637;--muted:#986f7d;--pink:#f5a8bb;--pink2:#fbd1dc;--line:#f3bdca;--shadow:0 12px 28px #9e52651c;--accent:#d85c7d;--cloud:#fffafd}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:var(--bg);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif;transition:background .25s,color .25s}
+body.dark{--bg:#271b2a;--paper:#3a2939;--ink:#fff0f5;--muted:#d2aebb;--pink:#75445d;--pink2:#58364d;--line:#70465c;--shadow:0 12px 30px #10081070;--accent:#ff9fbd;--cloud:#493348}
+button{font:inherit;cursor:pointer;border:0;color:inherit}.app{width:min(100%,480px);min-height:100dvh;margin:auto;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--bg),var(--paper));padding-bottom:34px;box-shadow:0 0 50px #6b32400d}
+/* Dezente Wolken und Sternchen als Hintergrund in beiden Farbmodi */
+.app:before,.app:after{content:"";position:absolute;z-index:0;pointer-events:none;left:-12%;width:124%;height:210px;opacity:.34;background:radial-gradient(ellipse at 12% 72%,var(--pink2) 0 16%,transparent 17%),radial-gradient(ellipse at 23% 65%,var(--pink2) 0 20%,transparent 21%),radial-gradient(ellipse at 37% 78%,var(--pink2) 0 16%,transparent 17%),radial-gradient(ellipse at 70% 72%,var(--pink2) 0 18%,transparent 19%),radial-gradient(ellipse at 83% 62%,var(--pink2) 0 20%,transparent 21%),radial-gradient(ellipse at 94% 77%,var(--pink2) 0 15%,transparent 16%)}
+.app:before{top:38px}.app:after{bottom:32px;transform:scaleY(-1);opacity:.25}
+.sparkle{position:absolute;z-index:0;pointer-events:none;color:var(--accent);opacity:.42;font-family:Georgia,serif;animation:twinkle 4.5s ease-in-out infinite}
+.sparkle.s1{top:116px;left:9%;font-size:18px}.sparkle.s2{top:235px;right:8%;font-size:14px;animation-delay:1.3s}.sparkle.s3{bottom:165px;left:13%;font-size:12px;animation-delay:2.1s}.sparkle.s4{bottom:225px;right:12%;font-size:17px;animation-delay:.7s}
+@keyframes twinkle{0%,100%{opacity:.22;transform:scale(.85) rotate(0)}50%{opacity:.65;transform:scale(1.15) rotate(18deg)}}
+.tap-heart{position:fixed;z-index:30;pointer-events:none;font-size:19px;line-height:1;color:var(--accent);text-shadow:0 2px 8px #d85c7d55;animation:heart-pop .85s ease-out forwards;will-change:transform,opacity}
+@keyframes heart-pop{0%{opacity:0;transform:translate(-50%,-15%) scale(.45) rotate(-12deg)}15%{opacity:1;transform:translate(-50%,-35%) scale(1.12) rotate(8deg)}100%{opacity:0;transform:translate(calc(-50% + var(--drift)), -115px) scale(.72) rotate(var(--turn))}}
+.top{height:70px;padding:20px 22px 8px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3}.brand{font-family:Georgia,serif;font-style:italic;font-size:19px;font-weight:bold;letter-spacing:-.25px;line-height:1.15;text-align:center;width:100%;min-width:0;padding:0 8px}.brand span{color:var(--accent)}.icon-btn{width:40px;height:40px;border-radius:50%;background:var(--paper);border:1px solid var(--line);font-size:19px;box-shadow:var(--shadow)}
+.screen{position:relative;z-index:1;padding:18px 22px 30px}.screen.hidden{display:none}.intro{text-align:center;padding-top:20px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:850;margin:0 0 12px}.headline{font-family:Georgia,serif;font-style:italic;font-size:34px;line-height:1.12;margin:0 0 10px;letter-spacing:-.8px}.subtitle{color:var(--muted);font-size:14px;line-height:1.5;margin:0 auto 26px;max-width:300px}
+.players{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 20px}.player{background:var(--paper);border:1.5px solid var(--line);border-radius:25px;padding:14px 8px 13px;box-shadow:var(--shadow);transition:transform .16s,border-color .16s}.player:active,.together:active,.mode:active{transform:scale(.98)}.player.selected{border:2px solid var(--accent);background:var(--pink2)}.avatar{width:116px;height:116px;max-width:100%;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 5px 14px #6e33401e}.player-name{display:block;font-family:Georgia,serif;font-style:italic;font-weight:bold;font-size:21px;margin:9px 0 0}.together{display:flex;align-items:center;justify-content:center;gap:12px;width:min(100%,290px);margin:0 auto;background:linear-gradient(120deg,var(--pink2),var(--paper));border:1.5px solid var(--line);border-radius:24px;padding:15px 18px;box-shadow:var(--shadow);font-weight:850;font-size:15px}.together .symbol{font-size:25px;color:var(--accent)}.footnote{text-align:center;font-size:11px;color:var(--muted);margin:16px 0 0}
+.mode-head{text-align:center;padding-top:12px}.mode-head .headline{font-size:32px}.active-player{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:30px;background:var(--paper);padding:7px 12px;font-size:12px;color:var(--muted);margin:0 0 24px}.active-player strong{color:var(--ink)}.mode-list{display:grid;gap:13px}.mode{width:100%;display:flex;align-items:center;gap:15px;text-align:left;padding:15px 16px;border-radius:22px;background:var(--paper);border:1.5px solid var(--line);box-shadow:var(--shadow);min-height:91px;transition:transform .15s}.mode-icon{width:54px;height:54px;flex:0 0 54px;border-radius:18px;display:grid;place-items:center;font-size:27px;background:var(--pink2);color:var(--accent)}.mode-copy{flex:1}.mode-copy strong{font-size:16px;display:block;margin-bottom:4px}.mode-copy small{font-size:12px;color:var(--muted)}.chevron{font-size:24px;color:var(--accent)}.bottom-art{position:relative;height:92px;margin:22px -22px -30px;overflow:visible;pointer-events:none;padding-bottom:0}.heart-line{position:absolute;left:0;right:0;bottom:0;width:100%;height:72px;overflow:visible}.heart-line path{fill:none;stroke:var(--accent);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:.82}.theme-corner{position:fixed;right:max(12px,calc((100vw - 480px)/2 + 12px));bottom:calc(env(safe-area-inset-bottom) + 12px);z-index:50;pointer-events:auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1.5px solid var(--line);font-size:20px;box-shadow:var(--shadow)}
+.toast{position:fixed;z-index:10;bottom:22px;left:50%;transform:translateX(-50%);background:#542637;color:#fff;padding:11px 16px;border-radius:30px;font-size:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap}.toast.show{opacity:1}.settings{display:flex;justify-content:center;margin-top:18px}.text-btn{background:transparent;color:var(--accent);font-size:12px;font-weight:800;padding:9px}.back{background:transparent;color:var(--accent);font-weight:800;padding:8px 0;margin-bottom:8px}
+@media(max-height:700px){.intro{padding-top:5px}.subtitle{margin-bottom:16px}.players{margin:14px 0}.avatar{width:96px;height:96px}.bottom-art{height:65px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head>
+<body><div class="app">
+<span class="sparkle s1" aria-hidden="true">✦</span><span class="sparkle s2" aria-hidden="true">✧</span><span class="sparkle s3" aria-hidden="true">✦</span><span class="sparkle s4" aria-hidden="true">✧</span>
+<header class="top"><div class="brand">Alina und Nikitas Game Night <span>♡</span></div></header>
+<section class="screen intro" id="welcome">
+<p class="eyebrow">Unser kleines Wir</p><h1 class="headline">Hallo ihr Lieben!<br>Wer spielt gerade?</h1><p class="subtitle">Wählt aus, wer heute dabei ist. Wir merken uns eure Auswahl auf diesem Handy.</p>
+<div class="players">
+<button class="player" data-player="Alina"><img class="avatar" src="alina-avatar.png" alt="Alinas Cartoon-Avatar"><span class="player-name">Alina</span></button>
+<button class="player" data-player="Nikita"><img class="avatar" src="nikita-avatar.png" alt="Nikitas Cartoon-Avatar"><span class="player-name">Nikita</span></button>
+</div>
+<button class="together" data-player="Zusammen"><span class="symbol">♡</span><span>Gemeinsamer Modus</span><span class="symbol">♡</span></button>
+<p class="footnote">Ein Handy, zwei Menschen und ganz viel gemeinsame Zeit.</p>
+<div class="bottom-art"><svg class="heart-line" viewBox="0 0 420 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 43 C42 43 52 25 92 31 S145 57 185 43 S250 22 290 37 S360 57 420 34"/></svg><button class="icon-btn themeBtn theme-corner" aria-label="Nachtmodus umschalten">☾</button></div>
+</section>
+<section class="screen hidden" id="modes">
+<button class="back" id="changeProfile">← Profil wechseln</button><div class="mode-head"><p class="eyebrow">Schön, dass ihr da seid</p><h1 class="headline">Eure Spielmodi ♡</h1><p class="subtitle">Worauf habt ihr heute Lust?</p><div class="active-player" id="activePlayer">♡ <strong>Alina</strong></div></div>
+<div class="mode-list">
+<button class="mode" data-mode="quiz"><span class="mode-icon">🏆</span><span class="mode-copy"><strong>Quizduell</strong><small>Allgemeinwissen & Fragen gegeneinander</small></span><span class="chevron">›</span></button>
+<button class="mode" data-mode="know"><span class="mode-icon">♡</span><span class="mode-copy"><strong>Wer kennt wen besser?</strong><small>Findet heraus, wer besser aufgepasst hat</small></span><span class="chevron">›</span></button>
+<button class="mode" data-mode="likely"><span class="mode-icon">⇄</span><span class="mode-copy"><strong>Wer würde eher?</strong><small>Vergleicht eure spontanen Entscheidungen</small></span><span class="chevron">›</span></button>
+<button class="mode" data-mode="couple"><span class="mode-icon">💕</span><span class="mode-copy"><strong>Couple Questions</strong><small>Lustige, persönliche & tiefere Fragen</small></span><span class="chevron">›</span></button>
+</div>
+<div class="bottom-art"><svg class="heart-line" viewBox="0 0 420 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 43 C42 43 52 25 92 31 S145 57 185 43 S250 22 290 37 S360 57 420 34"/></svg><button class="icon-btn themeBtn theme-corner" aria-label="Nachtmodus umschalten">☾</button></div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div></div>
+<script>
+(()=>{
+const KEY='twoOfUsDeviceProfileV1';const welcome=document.getElementById('welcome');const modes=document.getElementById('modes');const active=document.getElementById('activePlayer');const toast=document.getElementById('toast');let current=localStorage.getItem(KEY)||'';let toastTimer;
+function showModes(){welcome.classList.add('hidden');modes.classList.remove('hidden');active.innerHTML='♡ <strong></strong>';active.querySelector('strong').textContent=current||'Zusammen';}
+function showWelcome(){modes.classList.add('hidden');welcome.classList.remove('hidden');document.querySelectorAll('.player').forEach(b=>b.classList.toggle('selected',b.dataset.player===current));}
+function choose(name){current=name;localStorage.setItem(KEY,name);showModes();}
+function notify(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);}
+document.querySelectorAll('[data-player]').forEach(btn=>btn.addEventListener('click',()=>choose(btn.dataset.player)));
+document.getElementById('changeProfile').addEventListener('click',showWelcome);
+document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{const names={quiz:'Quizduell',know:'Wer kennt wen besser?',likely:'Wer würde eher?',couple:'Couple Questions'};notify(names[btn.dataset.mode]+' kommt als Nächstes 💗');}));
+// Kleiner Herz-Klickeffekt: 3–4 Herzen steigen kurz auf und verschwinden wieder.
+const app=document.querySelector('.app');
+app.addEventListener('pointerdown',event=>{
+  if(event.pointerType==='mouse' && event.button!==0)return;
+  const count=3+Math.floor(Math.random()*2);
+  for(let i=0;i<count;i++){
+    const heart=document.createElement('span');heart.className='tap-heart';heart.textContent=['♡','♥','♡','♥'][i%4];
+    const spread=(Math.random()-.5)*42;heart.style.left=(event.clientX+spread)+'px';heart.style.top=(event.clientY+Math.random()*8)+'px';
+    heart.style.setProperty('--drift',((Math.random()-.5)*65)+'px');heart.style.setProperty('--turn',((Math.random()-.5)*38)+'deg');
+    heart.style.animationDelay=(i*35)+'ms';app.appendChild(heart);heart.addEventListener('animationend',()=>heart.remove(),{once:true});
+  }
+});
+const themeButtons=document.querySelectorAll('.themeBtn');function setTheme(dark){document.body.classList.toggle('dark',dark);themeButtons.forEach(button=>button.textContent=dark?'☀':'☾');document.getElementById('themeColor').content=dark?'#271b2a':'#ffe8ef';localStorage.setItem('twoOfUsTheme',dark?'dark':'light');}themeButtons.forEach(button=>button.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark'))));setTheme(localStorage.getItem('twoOfUsTheme')==='dark');
+if(current){showModes();}else{showWelcome();}
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+})();
+</script></body></html>
